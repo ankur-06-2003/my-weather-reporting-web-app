@@ -13,41 +13,6 @@ body {
 background-position: center; */
 }
 
-.imageCycle1 {
-    background-image: url("../images/bg1.jpg");
-    background-size: cover;
-    background-position: center;
-}
-
-.imageCycle2 {
-    background-image: url("../images/bg2.jpg");
-    background-size: cover;
-    background-position: center;
-}
-
-.imageCycle3 {
-    background-image: url("../images/bg3.jpg");
-    background-size: cover;
-    background-position: center;
-}
-
-.imageCycle4 {
-    background-image: url("../images/bg4.jpg");
-    background-size: cover;
-    background-position: center;
-}
-
-.imageCycle7 {
-    background-image: url("../images/bg7.jpg");
-    background-size: cover;
-    background-position: center;
-}
-
-.imageCycle8 {
-    background-image: url("../images/bg8.jpg");
-    background-size: cover;
-    background-position: center;
-}
 
 .main-content {
     height: 100%;
