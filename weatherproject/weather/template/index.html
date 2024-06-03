@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="icon" href="download.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/responsive-style.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+
+</head>
+
+<body>
+    <div class="position-relative main_content">
+        <div class="bg" class="container">
+            <div class="logo mt-4 ms-4 mt-lg-5 ms-lg-5 position-absolute">
+                <h5>the weather</h5>
+            </div>
+            <!-- display on small and mid screens -->
+            <div id="div1" class="temperature-small d-lg-none d-sm-flex d-flex position-absolute ms-4 shimmer">
+                <div class="degree text-white mt-auto">
+                    <p id="degree_small">{{temp}}°C</p>
+                </div>
+                <div class="place-time">
+                    <div class="place text-white ms-3">
+                        <p id="place_small">{{location_name}}</p>
+                    </div>
+                    <div class="time d-flex text-white">
+                        <h6 id="time_small" class="ms-3">{{time}}</h6>
+                        <h6 id="day_small" class="ms-1">{{day}}</h6>
+                        <h6 id="date_small" class="ms-1">{{date}}</h6>
+                        <h6 id="month_small" class="ms-1">{{month}}</h6>
+                        <h6 id="year_small" class="ms-1">{{year}}</h6>
+                    </div>
+                </div>
+                <div class="icon-name ms-2">
+                    <!-- <div class="weather-icon"><img id="weather_icon_small" src="WhatsApp Image 2024-05-16 at 10.37.37.jpeg" alt="#"></div> -->
+                    <div
+                        class="weather-name text-white justify-content-center d-flex pt-1 ms-2 mt-4 animate- character">
+                        <p id="weather_name_small">{{sky}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="Search-small d-lg-none position-absolute top-50 start-0">
+                <div class="input-group search-bar ">
+                    <div id="search-autocomplete" class="form-outline ms-auto">
+                        <input type="search" id="form1" Placeholder="Another Location..."
+                            class="form-control shadow-none " style="color: white;" />
+                        <!-- <label class="form-label" for="form1">Search</label> -->
+                        <div class="line"></div>
+                    </div>
+                    <button type="button" onclick="getWeather(input,'in')" class="button-icon" id="button_color_small">
+                        <i class="fas fa-search text-white"></i> </button>
+                </div>
+                <div class="cities ms-4">
+                    <ul id="city_ul_small">
+                        <!-- <li class="mt-4"><p>Birmingham</p></li> <li class="mt-4"><p>Manchester</p></li>
+<li class="mt-4"><p>New York</p></li>
+<li class="mt-4"><p>California</p></li> -->
+                    </ul>
+                </div>
+                <div class="line2 ms-5"></div>
+                <div class="details">
+                    <ul>
+                        <h4 class="ms-3 text-white mt-4 mb-4">Weather Details</h4>
+                        <li class="d-flex justify-content-between ms-3 me-5 ">
+                            <span>
+                                <p>Cloud</p>
+                            </span>
+                            <span class="cloud">
+                                <p id="cloud_small">{{cloud}}%</p>
+                            </span>
+                        </li>
+                        <li class="d-flex justify-content-between ms-3 me-5 "> <span>
+                                <p>Humidity</p>
+                            </span>
+                            <span class="humidity">
+                                <p id="humidity_small">{{humidity}}%</p>
+                            </span>
+                        </li>
+                        <li class="d-flex justify-content-between ms-3 me-5 ">
+                            <span>
+                                <p>Wind</p>
+                            </span>
+                            <span class="wind">
+                                <p id="wind_small">{{wind}}km/h</p>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- display above large screens -->
+
+            <div class="Search d-none d-lg-block ms-auto">
+                <form method="post" class="myform">
+                    {% csrf_token %}
+                    <div class="input-group search-bar ">
+
+                        <div id="search-autocomplete" class="form-outline ms-auto">
+                            <input type="search" id="form1Large" name="city" Placeholder="Another Location . . ."
+                                class="form-control shadow-none " style="color: white;" />
+                            <!-- <label class="form-label" for="form1">Search</label> -->
+                            <div class="line"></div>
+                        </div>
+                        <button type="submit" onclick="getWeather(input,'in')" class="button-icon"
+                            id="button_color_large">
+                            <i class="fas fa-search text-white"></i> </button>
+                    </div>
+                </form>
+                <div class="cities ms-4">
+                    <ul id="city_ul_large">
+                        <!-- <li class="mt-5"><p>Birmingham</p></li> <li class="mt-5"><p>Manchester</p></li>
+    <li class="mt-5"><p>New York</p></li>
+    <li class="mt-5 mb-5"><p>California</p></li> -->
+                    </ul>
+                </div>
+                <div class="line2 ms-5"></div>
+                <div class="details">
+                    <ul>
+                        <h4 class="ms-3 mt-5 mb-5 text-white">Weather Details</h4>
+                        <li class="d-flex justify-content-between ms-3 me-5 mt-4">
+                            <span>
+                                <p>Cloud</p>
+                            </span>
+                            <span class="cloud">
+                                <p id="cloud_large">{{cloud}}%</p>
+                            </span>
+                        </li>
+                        <li class="d-flex justify-content-between ms-3 me-5 mt-4"> <span>
+                                <p>Humidity</p>
+                            </span>
+                            <span class="humidity">
+                                <p id="humidity_large">{{humidity}}%</p>
+                            </span>
+                        </li>
+                        <li class="d-flex justify-content-between ms-3 me-5 mt-4">
+                            <span>
+                                <p>Wind</p>
+                            </span>
+                            <span class="wind">
+                                <p id="wind_large">{{wind}}km/h</p>
+                            </span>
+                        </li>
+                        <li class="d-flex justify-content-between ms-3 me-5 mt-4">
+                            <span>
+                                <p>Pressure</p>
+                            </span>
+                            <span class="pressure">
+                                <p class="pressure_large"> {{pressure}}hpa</p>
+                            </span>
+
+                        </li>
+                        <li class="d-flex justify-content-between ms-3 me-5 mt-4">
+                            <span>
+                                <p>Visiblity</p>
+                            </span>
+                            <span class="Visiblity">
+                                <p id="Visiblity_large">{{visibility}}km</p>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div
+            class="temperature d-none d-lg-flex position-absolute d-flex align-items-center bottom-0 start-0 mb-5 ms-5 shimmer">
+            <div class="degree text-white">
+                <p id="degree_large">{{temp}}°C</p>
+            </div>
+            <div class="place-time me-4">
+                <div class="place text-white">
+                    <h1 id="place_large"> {{location_name}}</h1>
+                </div>
+                <div class="time d-flex text-white">
+                    <h6 id="time_small" class="ms-3">{{time}}</h6>
+                    <h6 id="day_small" class="ms-1">{{day}}</h6>
+                    <h6 id="date_small" class="ms-1">{{date}}</h6>
+                    <h6 id="month_small" class="ms-1">{{month}}</h6>
+                    <h6 id="year_small" class="ms-1">{{year}}</h6>
+                </div>
+            </div>
+            <div class="icon-name">
+                <!-- <div class="weather-icon"><img id="weather_icon_large" src="" alt="#"></div> -->
+                <div class="weather-name text-white ms-2 animate-character">
+                    <h5 id="weather_name_large">{{sky}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
